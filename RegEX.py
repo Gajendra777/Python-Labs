@@ -2,7 +2,7 @@
 
 import re
 import csv
-
+import sys
 
 def contains_domain(address, domain):
   """Returns True if the email address contains the given,domain,in the domain position, false if not."""
@@ -50,5 +50,8 @@ def main():
     writer = csv.writer(output_file)
     writer.writerows(user_data_list)
     output_file.close()
+    print("File Successfully Written")
+
+sys.exit(0)
 
 main()
