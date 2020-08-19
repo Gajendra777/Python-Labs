@@ -2,31 +2,6 @@ import re
 import csv
 import operator
 
-def User_Usage_StatisticsReport(logfile):
-    user_usage = {}
-    pattern = re.compile(r'.* (INFO|ERROR) .* \(([a-zA-z]+)\)$')
-    try:
-        with open(logfile) as file:
-            for line in file.readlines():
-                match = pattern.search(line)
-                msg_type = match.group(1)
-                username = match.group(2)
-                if msg_type == "ERROR" :
-                    if username in user_usage.keys():
-                        user_usage.setdefault(username, {})['error_count'] = user_usage[username].get('error_count',0) + 1
-                    else:
-                        user_usage.setdefault(username, {})['error_count'] = 1
-                elif msg_type == "INFO":
-                    if username in user_usage.keys():
-                        user_usage.setdefault(username, {})['info_count'] = user_usage[username].get('info_count',0) + 1
-                    else :
-                        user_usage.setdefault(username, {})['info_count'] = 1
-    except FileNotFoundError:
-        print("The provided Log File {} does not exist".format(logfile))
-    except Exception as err:
-        print("An Error occured {} while processing the log file \n {}".format(type(err),err))
-    return user_usage
-
 def Error_Messages_Report(logfile):
     Error_Msg = {}
     pattern = re.compile(r'.*ERROR ([a-zA-z ]+.+) \([a-zA-z]+\)$')
