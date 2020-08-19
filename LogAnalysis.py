@@ -2,24 +2,6 @@ import re
 import csv
 import operator
 
-def Error_Messages_Report(logfile):
-    Error_Msg = {}
-    pattern = re.compile(r'.*ERROR ([a-zA-z ]+.+) \([a-zA-z]+\)$')
-    try:
-        with open(logfile) as file:
-            for line in file.readlines():
-                match = pattern.search(line)
-                if match :
-                    errormsg = match.group(1)
-                    Error_Msg[errormsg] = Error_Msg.get(errormsg,0) + 1
-            file.close()
-    except FileNotFoundError:
-        print("The provided Log File {} does not exist".format(logfile))
-    except Exception as err:
-        print("An Error occured {} while processing the log file \n {}".format(type(err),err))
-    return Error_Msg
-
-
 def populate_ErrorMessage_and_UserStatistics_dict():
     Error_Msg = {}
     user_usage = {}
