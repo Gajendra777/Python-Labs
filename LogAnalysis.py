@@ -1,14 +1,15 @@
 import re
 import csv
 import operator
-
+import os
 def populate_ErrorMessage_and_UserStatistics_dict():
     Error_Msg = {}
     user_usage = {}
 
+    filename = os.path.join("../","TextFiles","ServiceLogfile.txt") 
     pattern = re.compile(r'.* ticky: (ERROR|INFO) ([a-zA-z ]+.+) \((.*)\)$')
     try:
-        with open('.\\TextFiles\\ServiceLogfile.txt') as file:
+        with open(filename) as file:
             for line in file.readlines():
                 match = pattern.search(line)
                 msg_type = match.group(1)
@@ -25,8 +26,8 @@ def populate_ErrorMessage_and_UserStatistics_dict():
                         user_usage.setdefault(username, {})['info_count'] = user_usage[username].get('info_count',0) + 1
                     else :
                         user_usage.setdefault(username, {})['info_count'] = 1
-    except FileNotFoundError:
-        print("The provided Log File does not exist")
+    except FileNotFoundError as err:
+        print("The provided Log File does not exist ", err)
     except Exception as err:
         print("An Error occured {} while processing the log file \n {}".format(type(err),err))
     return Error_Msg,user_usage
