@@ -1,2 +1,4 @@
 # Output Files #
 *.csv 
+*.pdf
+*.txt
