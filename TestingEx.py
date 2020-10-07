@@ -2,7 +2,7 @@
 
 import sys
 import csv
-import datetime
+from datetime import date
 
 def populate_dictionary(filename):
     """Populate a dictionary with name/email pairs for easy lookup."""
@@ -32,6 +32,6 @@ def find_email(argv):
 def main():
     print(find_email(sys.argv))
 
+
 if __name__ == "__main__":
     main()
-    est()
