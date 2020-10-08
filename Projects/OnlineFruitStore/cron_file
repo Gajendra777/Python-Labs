@@ -1,0 +1,25 @@
+#  
+# 
+# * * * * * command(s)
+# - - - - -
+# | | | | |
+# | | | | ----- Day of week (0 - 7) (Sunday=0 or 7)
+# | | | ------- Month (1 - 12)
+# | | --------- Day of month (1 - 31)
+# | ----------- Hour (0 - 23)
+# ------------- Minute (0 - 59)
+# 
+# 
+# 
+# 
+# In order for cron_file to work, you need to modifiy the health_check.py.
+# line 34
+#   receiver = "{}@example.com".format(os.environ["USER"])
+# to
+#   receiver = "{user-name}@example.com"
+
+1 * * * * . $HOME/.profile; python3 /home/student-02-a08368710453/health_check.py
+
+
+
+# {user-name} is the username provided by your qwiklabs session
